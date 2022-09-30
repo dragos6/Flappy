@@ -4,19 +4,18 @@ using UnityEngine;
 
 public class MovableObject : MonoBehaviour
 {
-    [SerializeField] float speed = 20f;
+    [SerializeField] float platformSpeed = 5f;
     [SerializeField] float resetPosition = 17.74f;
     [SerializeField] Vector3 defaultPos;
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
-        Debug.Log((int)transform.localPosition.x);
+        transform.Translate(Vector3.forward * (Time.deltaTime * platformSpeed));
         if(transform.position.x > resetPosition)
         {
-            transform.position = defaultPos;
+            transform.position = new Vector3(defaultPos.x,transform.position.y, transform.position.z);
         }
-        transform.Translate(Vector3.forward * (Time.deltaTime * speed));
 
     }
 }
