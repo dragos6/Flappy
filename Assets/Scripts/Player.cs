@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 
 public class Player : MonoBehaviour
@@ -14,6 +15,11 @@ public class Player : MonoBehaviour
     [SerializeField] float forceValue = 50f;
     private bool jump;
     // Start is called before the first frame update
+    private void Awake()
+    {
+            Assert.IsNotNull(sfxJump);
+            Assert.IsNotNull(sfxDeath);
+    }
     void Start()
     {
         animator = GetComponent<Animator>();
