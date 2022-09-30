@@ -24,7 +24,6 @@ public class FloatingObstacle : MovableObject
             transform.localPosition += direction * Time.deltaTime * speed;
             yield return null;
         }
-        print("Reached the target ");
         yield return new WaitForSeconds(0.5f);
         Vector3 newTarget = target.y == topPos.y ? bottomPos : topPos;
         StartCoroutine(Move(newTarget));
