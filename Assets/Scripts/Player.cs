@@ -11,6 +11,8 @@ public class Player : MonoBehaviour
     private AudioSource audioSource;
     [SerializeField] AudioClip sfxJump;
     [SerializeField] AudioClip sfxDeath;
+    [SerializeField] Vector3 startPos;
+    [SerializeField] Quaternion startRotation;
 
     [SerializeField] float forceValue = 50f;
     private bool jump;
@@ -34,16 +36,16 @@ public class Player : MonoBehaviour
     {
         if (!GameManager.instance.GameOver && GameManager.instance.GameStarted)
         {
-
+          
             if (Input.GetMouseButtonDown(0))
             {
+                
                 GameManager.instance.PlayerStartGame();
 
                     rb.useGravity = true;
                     audioSource.PlayOneShot(sfxJump);
                     animator.Play("Jump");
                     jump = true;
-
 
             }
         }
@@ -62,10 +64,15 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.tag == "obstacle")
         {
-            audioSource.PlayOneShot(sfxDeath);
-            rb.AddForce(new Vector2(50, 20), ForceMode.Impulse);
-            rb.detectCollisions = false;
-            GameManager.instance.PlayerCollided();
+            DeathSequence();
         }
+    }
+
+    private void DeathSequence()
+    {
+        audioSource.PlayOneShot(sfxDeath);
+        rb.AddForce(new Vector2(50, 20), ForceMode.Impulse);
+        rb.detectCollisions = false;
+        GameManager.instance.PlayerCollided();
     }
 }

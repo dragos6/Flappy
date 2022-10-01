@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance = null;
 
     [SerializeField] private GameObject mainMenu;
+    [SerializeField] private GameObject restartMenu;
     private bool playerActive = false;
     private bool gameOver = false;
     private bool gameStarted = false;
@@ -20,6 +21,7 @@ public class GameManager : MonoBehaviour
         
         Singleton();
         Assert.IsNotNull(mainMenu);
+        Assert.IsNotNull(restartMenu);
     }
  
 
@@ -51,6 +53,8 @@ public class GameManager : MonoBehaviour
     public void PlayerCollided()
     {
         gameOver = true;
+        gameStarted = false;
+        //restartMenu.SetActive(true);
     }
 
     public void PlayerStartGame()
@@ -59,7 +63,15 @@ public class GameManager : MonoBehaviour
     }
     public void EnterGame()
     {
+        //restartMenu.SetActive(false);
         mainMenu.SetActive(false);
         gameStarted = true;
     }
+
+    /*public void EnterMainMenu()
+    {
+        restartMenu.SetActive(false);
+        mainMenu.SetActive(true);
+        gameStarted = true;
+    }*/
 }
