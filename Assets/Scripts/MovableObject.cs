@@ -11,11 +11,13 @@ public class MovableObject : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
-        transform.Translate(Vector3.forward * (Time.deltaTime * platformSpeed));
-        if(transform.position.x > resetPosition)
+        if(!GameManager.instance.GameOver )
         {
-            transform.position = new Vector3(defaultPos.x,transform.position.y, transform.position.z);
+            transform.Translate(Vector3.forward * (Time.deltaTime * platformSpeed));
+            if (transform.position.x > resetPosition)
+            {
+                transform.position = new Vector3(defaultPos.x, transform.position.y, transform.position.z);
+            }
         }
-
     }
 }

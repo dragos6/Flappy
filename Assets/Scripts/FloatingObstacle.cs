@@ -14,6 +14,7 @@ public class FloatingObstacle : MovableObject
     }
     protected override void Update()
     {
+        if(GameManager.instance.PlayerActive)
         base.Update();
     }
     IEnumerator Move(Vector3 target)
